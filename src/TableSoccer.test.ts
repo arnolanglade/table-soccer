@@ -1,11 +1,21 @@
 import {Game, Player, Score} from "./TableSoccer";
 
 describe('Game', () => {
-    test('it start a game with two players', () => {
+    test('it starts a game with two players', () => {
         expect(
             Game.start('arn0', 'Popeye')
         ).toEqual(
             new Game(new Player('arn0'), new Player('Popeye'), Score.playersHaveNotScored())
+        );
+    })
+
+    test('it records the score at the end of the game', () => {
+        const game = Game.start('arn0', 'Popeye');
+
+        expect(
+            game.recordScore(10, 1)
+        ).toEqual(
+            new Game(new Player('arn0'), new Player('Popeye'), new Score(10, 1))
         );
     })
 });

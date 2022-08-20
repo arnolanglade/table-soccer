@@ -18,4 +18,8 @@ export class Game {
     public static start(redPlayerNickname: Nickname, bluePlayerNickname: Nickname): Game {
         return new Game(new Player(redPlayerNickname), new Player(bluePlayerNickname), Score.playersHaveNotScored());
     }
+
+    public recordScore(redPlayerScore: number, bluePlayerScore: number) {
+        return new Game(this.redPlayer, this.bluePlayer, new Score(redPlayerScore, bluePlayerScore));
+    }
 }
