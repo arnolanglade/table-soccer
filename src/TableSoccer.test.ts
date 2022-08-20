@@ -5,13 +5,13 @@ describe('Game', () => {
         expect(
             Game.start('arn0', 'Popeye')
         ).toEqual(
-            new Game(new Player('arn0'), new Player('Popeye'), Score.empty())
+            new Game(new Player('arn0'), new Player('Popeye'), Score.playersHaveNotScored())
         );
     })
 });
 
 describe('Score', () => {
     test('the score is 0 - 0 at the beginning of the game ', () => {
-        expect(Score.empty()).toEqual(new Score(0, 0));
+        expect(Score.playersHaveNotScored()).toEqual(new Score(0, 0));
     })
 });
