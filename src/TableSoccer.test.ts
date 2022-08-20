@@ -5,7 +5,7 @@ describe('Game', () => {
         expect(
             Game.start('arn0', 'Popeye')
         ).toEqual(
-            new Game(new Player('arn0'), new Player('Popeye'))
+            new Game(new Player('arn0'), new Player('Popeye'), Score.empty())
         );
     })
 });

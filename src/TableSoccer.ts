@@ -13,9 +13,9 @@ export class Score {
 }
 
 export class Game {
-    constructor(private redPlayer: Player,  private bluePlayer: Player) {}
+    constructor(private redPlayer: Player,  private bluePlayer: Player, private gameScore: Score) {}
 
     public static start(redPlayerNickname: Nickname, bluePlayerNickname: Nickname): Game {
-        return new Game(new Player(redPlayerNickname), new Player(bluePlayerNickname));
+        return new Game(new Player(redPlayerNickname), new Player(bluePlayerNickname), Score.empty());
     }
 }
