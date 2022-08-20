@@ -4,6 +4,14 @@ export class Player {
     constructor(private nickname: Nickname) {}
 }
 
+export class Score {
+    constructor(private redPlayerScore: number, private bluePlayerScore: number) {}
+
+    public static empty(): Score {
+        return new Score(0, 0);
+    }
+}
+
 export class Game {
     constructor(private redPlayer: Player,  private bluePlayer: Player) {}
 
