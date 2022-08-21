@@ -124,8 +124,21 @@ export class aGame {
         return this;
     }
 
-    public withGameStartedEvent(redPlayerNickname: Nickname, bluePlayerNickname: Nickname): aGame {
+    public withOneVersusOneGameStartedEvent(redPlayerNickname: Nickname, bluePlayerNickname: Nickname): aGame {
         this.events = [new GameStarted(Team.ofOnePlayer(redPlayerNickname), Team.ofOnePlayer(bluePlayerNickname))];
+        return this;
+    }
+
+    public withTwoVersusTwoGameStartedEvent(
+        redAttackerNickname: Nickname,
+        redDefenderNickname: Nickname,
+        blueAttackerNickname: Nickname,
+        blueDefenderNickname: Nickname
+    ): aGame {
+        this.events = [new GameStarted(
+            Team.ofTwoPlayer(redAttackerNickname, redDefenderNickname),
+            Team.ofTwoPlayer(blueAttackerNickname, blueDefenderNickname)
+        )];
         return this;
     }
 
