@@ -20,6 +20,12 @@ describe('Game', () => {
             new aGame().withRedTeam('arn0', 'momos')
                 .withBlueTeam('Popeye', 'coco')
                 .withScore(0, 0)
+                .withEvents(
+                    new GameStarted(
+                        Team.ofTwoPlayer('arn0', 'momos'),
+                        Team.ofTwoPlayer('Popeye', 'coco')
+                    )
+                )
                 .build()
         );
     })
@@ -30,7 +36,8 @@ describe('Game', () => {
         expect(
             game.recordScore(10, 1)
         ).toEqual(
-            new aGame().withScore(10, 1).build()
+            new aGame().withScore(10, 1)
+                .build()
         );
     })
 });

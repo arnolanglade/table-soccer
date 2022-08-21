@@ -49,7 +49,7 @@ export class Game {
             redTeam,
             blueTeam,
             Score.playersHaveNotScored(),
-            [new GameStarted(redTeam, blueTeam)]
+            [new GameStarted(redTeam, blueTeam)],
         );
     }
 
@@ -59,10 +59,14 @@ export class Game {
         blueAttackerNickname: Nickname,
         blueDefenderNickname: Nickname
     ): Game {
+        const redTeam = Team.ofTwoPlayer(redAttackerNickname, redDefenderNickname);
+        const blueTeam = Team.ofTwoPlayer(blueAttackerNickname, blueDefenderNickname);
+
         return new Game(
-            Team.ofTwoPlayer(redAttackerNickname, redDefenderNickname),
-            Team.ofTwoPlayer(blueAttackerNickname, blueDefenderNickname),
-            Score.playersHaveNotScored()
+            redTeam,
+            blueTeam,
+            Score.playersHaveNotScored(),
+            [new GameStarted(redTeam, blueTeam)],
         );
     }
 
