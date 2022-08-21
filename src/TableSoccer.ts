@@ -27,7 +27,7 @@ export class Score {
 export class Game {
     constructor(private redTeam: Team,  private blueTeam: Team, private gameScore: Score) {}
 
-    public static start(redPlayerNickname: Nickname, bluePlayerNickname: Nickname): Game {
+    public static startOneVersusOne(redPlayerNickname: Nickname, bluePlayerNickname: Nickname): Game {
         return new Game(
             Team.ofOnePlayer(redPlayerNickname),
             Team.ofOnePlayer(bluePlayerNickname),

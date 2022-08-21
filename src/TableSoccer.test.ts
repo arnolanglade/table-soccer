@@ -1,9 +1,9 @@
 import {Game, aGame, Player, Score, Team} from "./TableSoccer";
 
 describe('Game', () => {
-    test('it starts a game with two players', () => {
+    test('it starts a one versus game', () => {
         expect(
-            Game.start('arn0', 'Popeye')
+            Game.startOneVersusOne('arn0', 'Popeye')
         ).toEqual(
             new aGame().withRedPlayer('arn0')
                 .withBluePlayer('Popeye')
