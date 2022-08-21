@@ -25,36 +25,40 @@ export class Score {
 }
 
 export class Game {
-    constructor(private redPlayer: Player,  private bluePlayer: Player, private gameScore: Score) {}
+    constructor(private redTeam: Team,  private blueTeam: Team, private gameScore: Score) {}
 
     public static start(redPlayerNickname: Nickname, bluePlayerNickname: Nickname): Game {
-        return new Game(new Player(redPlayerNickname), new Player(bluePlayerNickname), Score.playersHaveNotScored());
+        return new Game(
+            Team.ofOnePlayer(redPlayerNickname),
+            Team.ofOnePlayer(bluePlayerNickname),
+            Score.playersHaveNotScored()
+        );
     }
 
     public recordScore(redPlayerScore: number, bluePlayerScore: number) {
-        return new Game(this.redPlayer, this.bluePlayer, new Score(redPlayerScore, bluePlayerScore));
+        return new Game(this.redTeam, this.blueTeam, new Score(redPlayerScore, bluePlayerScore));
     }
 }
 
 /** @internal */
 export class aGame {
-    private redPlayer: Player
-    private bluePlayer: Player
+    private redTeam: Team
+    private blueTeam: Team
     private gameScore: Score
 
     constructor() {
-        this.redPlayer = new Player('arn0');
-        this.bluePlayer = new Player('Popeye');
+        this.redTeam = Team.ofOnePlayer('arn0');
+        this.blueTeam = Team.ofOnePlayer('Popeye');
         this.gameScore = new Score(0, 0)
     }
 
     public withRedPlayer(nickname: Nickname): aGame {
-        this.redPlayer = new Player(nickname);
+        this.redTeam = Team.ofOnePlayer(nickname);
         return this;
     }
 
     public withBluePlayer(nickname: Nickname): aGame {
-        this.bluePlayer = new Player(nickname);
+        this.blueTeam = Team.ofOnePlayer(nickname);
         return this;
     }
 
@@ -64,6 +68,6 @@ export class aGame {
     }
 
     public build(): Game {
-        return new Game(this.redPlayer, this.bluePlayer, this.gameScore);
+        return new Game(this.redTeam, this.blueTeam, this.gameScore);
     }
 }
