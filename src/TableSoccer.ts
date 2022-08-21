@@ -1,13 +1,3 @@
-interface Event {}
-
-export class GameStarted implements Event {
-    constructor(private redTeam: Team, private blueTeam: Team) {}
-}
-
-export class GameEnded implements Event {
-    constructor(private redTeam: Team, private blueTeam: Team,  private score: Score) {}
-}
-
 export type Player = string;
 
 export class Team {
@@ -28,6 +18,16 @@ export class Score {
     public static playersHaveNotScored(): Score {
         return new Score(0, 0);
     }
+}
+
+interface Event {}
+
+export class GameStarted implements Event {
+    constructor(private redTeam: Team, private blueTeam: Team) {}
+}
+
+export class GameEnded implements Event {
+    constructor(private redTeam: Team, private blueTeam: Team,  private score: Score) {}
 }
 
 export class Game {
@@ -79,6 +79,10 @@ export class Game {
             score,
             [new GameEnded(this.redTeam, this.blueTeam, score)],
         );
+    }
+
+    public toState(): [string, string, string, string, number, number] {
+        return ['arn0', 'momos', 'Popeye', 'coco', 10, 1];
     }
 }
 

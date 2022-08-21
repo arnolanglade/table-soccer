@@ -36,6 +36,20 @@ describe('Game', () => {
                 .build()
         );
     })
+
+    test('it turns a game to its state', () => {
+        const game = new aGame()
+            .withRedTeam('arn0', 'momos')
+            .withBlueTeam('Popeye', 'coco')
+            .withScore(10, 1)
+            .build();
+
+        expect(
+            game.toState()
+        ).toEqual(
+            ['arn0', 'momos', 'Popeye', 'coco', 10, 1]
+        );
+    })
 });
 
 describe('Score', () => {
