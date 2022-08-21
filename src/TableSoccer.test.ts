@@ -32,7 +32,7 @@ describe('Game', () => {
             game.recordScore(10, 1)
         ).toEqual(
             new aGame().withScore(10, 1)
-                .withEvents(new GameEnded(Team.ofOnePlayer('arn0'), Team.ofOnePlayer('Popeye'), new Score(10, 1)))
+                .withGameEndedEvent()
                 .build()
         );
     })

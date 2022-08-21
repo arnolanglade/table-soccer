@@ -129,8 +129,8 @@ export class aGame {
         return this;
     }
 
-    public withEvents(...events: Event[]): aGame {
-        this.events = events;
+    public withGameEndedEvent(): aGame {
+        this.events = [new GameEnded(this.redTeam, this.blueTeam, this.gameScore)];
         return this;
     }
 
