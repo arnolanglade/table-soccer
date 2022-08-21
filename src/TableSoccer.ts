@@ -124,7 +124,7 @@ export class aGame {
         return this;
     }
 
-    public withGameEventEvent(redPlayerNickname: Nickname, bluePlayerNickname: Nickname): aGame {
+    public withGameStartedEvent(redPlayerNickname: Nickname, bluePlayerNickname: Nickname): aGame {
         this.events = [new GameStarted(Team.ofOnePlayer(redPlayerNickname), Team.ofOnePlayer(bluePlayerNickname))];
         return this;
     }
