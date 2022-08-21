@@ -35,3 +35,35 @@ export class Game {
         return new Game(this.redPlayer, this.bluePlayer, new Score(redPlayerScore, bluePlayerScore));
     }
 }
+
+/** @internal */
+export class aGame {
+    private redPlayer: Player
+    private bluePlayer: Player
+    private gameScore: Score
+
+    constructor() {
+        this.redPlayer = new Player('arn0');
+        this.bluePlayer = new Player('Popeye');
+        this.gameScore = new Score(0, 0)
+    }
+
+    public withRedPlayer(nickname: Nickname): aGame {
+        this.redPlayer = new Player(nickname);
+        return this;
+    }
+
+    public withBluePlayer(nickname: Nickname): aGame {
+        this.bluePlayer = new Player(nickname);
+        return this;
+    }
+
+    public withScore(redScore, blueCore): aGame {
+        this.gameScore = new Score(redScore, blueCore);
+        return this;
+    }
+
+    public build(): Game {
+        return new Game(this.redPlayer, this.bluePlayer, this.gameScore);
+    }
+}

@@ -1,21 +1,24 @@
-import {Game, Player, Score, Team} from "./TableSoccer";
+import {Game, aGame, Player, Score, Team} from "./TableSoccer";
 
 describe('Game', () => {
     test('it starts a game with two players', () => {
         expect(
             Game.start('arn0', 'Popeye')
         ).toEqual(
-            new Game(new Player('arn0'), new Player('Popeye'), Score.playersHaveNotScored())
+            new aGame().withRedPlayer('arn0')
+                .withBluePlayer('Popeye')
+                .withScore(0, 0)
+                .build()
         );
     })
 
     test('it records the score at the end of the game', () => {
-        const game = Game.start('arn0', 'Popeye');
+        const game = new aGame().build();
 
         expect(
             game.recordScore(10, 1)
         ).toEqual(
-            new Game(new Player('arn0'), new Player('Popeye'), new Score(10, 1))
+            new aGame().withScore(10, 1).build()
         );
     })
 });
