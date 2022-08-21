@@ -107,7 +107,7 @@ export class Game {
         return new Game(
             this.redTeam,
             this.blueTeam,
-            new Score(1, 0),
+            this.gameScore.increase(this.redTeam.isTeammate(player) ? TeamColor.Red : TeamColor.Blue),
             [],
         );
     }
