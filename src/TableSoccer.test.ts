@@ -74,4 +74,12 @@ describe('Team', () => {
     test('it builds a team of two players', () => {
         expect(Team.ofTwoPlayer('arn0', 'momos')).toEqual(new Team(['arn0', 'momos']));
     })
+
+    test('it turns a two players team to its state', () => {
+        expect(
+            Team.ofTwoPlayer('arn0', 'momos').toState()
+        ).toEqual(
+            ['arn0', 'momos']
+        );
+    })
 });

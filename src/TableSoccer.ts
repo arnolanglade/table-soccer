@@ -10,6 +10,10 @@ export class Team {
     public static ofTwoPlayer(attacker: Player, defender: Player): Team {
         return new Team([attacker, defender]);
     }
+
+    public toState(): [string, string] {
+        return this.players;
+    }
 }
 
 export class Score {
@@ -86,7 +90,7 @@ export class Game {
     }
 
     public toState(): [string, string, string, string, number, number] {
-        return ['arn0', 'momos', 'Popeye', 'coco', ...this.gameScore.toState()];
+        return [...this.redTeam.toState(), ...this.blueTeam.toState(), ...this.gameScore.toState()];
     }
 }
 
