@@ -1,4 +1,4 @@
-import {Game, Player, Score} from "./TableSoccer";
+import {Game, Player, Score, Team} from "./TableSoccer";
 
 describe('Game', () => {
     test('it starts a game with two players', () => {
@@ -21,7 +21,13 @@ describe('Game', () => {
 });
 
 describe('Score', () => {
-    test('the score is 0 - 0 at the beginning of the game ', () => {
+    test('the score is 0 - 0 at the beginning of the game', () => {
         expect(Score.playersHaveNotScored()).toEqual(new Score(0, 0));
+    })
+});
+
+describe('Team', () => {
+    test('it builds a team of one player', () => {
+        expect(Team.ofOnePlayer('arn0')).toEqual(new Team([new Player('arn0')]));
     })
 });

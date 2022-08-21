@@ -1,5 +1,13 @@
 type Nickname = string;
 
+export class Team {
+    constructor(private players: Player[]) {}
+
+    public static ofOnePlayer(nickname: Nickname): Team {
+        return new Team([new Player(nickname)]);
+    }
+}
+
 export class Player {
     constructor(private nickname: Nickname) {}
 }
