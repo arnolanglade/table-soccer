@@ -84,6 +84,15 @@ export class Game {
         );
     }
 
+    public goalScoredBy(player: Player): Game {
+        return new Game(
+            this.redTeam,
+            this.blueTeam,
+            new Score(1, 0),
+            [],
+        );
+    }
+
     public toState(): [string, string, string, string, number, number] {
         return [...this.redTeam.toState(), ...this.blueTeam.toState(), ...this.gameScore.toState()];
     }

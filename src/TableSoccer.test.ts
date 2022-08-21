@@ -25,6 +25,22 @@ describe('Game', () => {
         );
     })
 
+    test('it records a gaol scored by a registered player', () => {
+        const game = new aGame()
+            .withRedPlayer('arn0')
+            .withBluePlayer('Popeye')
+            .withScore(0, 0)
+            .build();
+
+        expect(game.goalScoredBy('arn0')).toEqual(
+            new aGame()
+                .withRedPlayer('arn0')
+                .withBluePlayer('Popeye')
+                .withScore(1, 0)
+            .build()
+        );
+    })
+
     test('it turns a game to its state', () => {
         const game = new aGame()
             .withRedTeam('arn0', 'momos')
