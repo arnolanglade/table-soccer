@@ -12,7 +12,13 @@ export class Team {
     }
 
     public toState(): [string, string] {
-        return this.players;
+        return this.players.reduce(
+            (players: string[], player: Player, index: number) => {
+                players[index] = player;
+                return players;
+            },
+            ['', '']
+        );
     }
 }
 

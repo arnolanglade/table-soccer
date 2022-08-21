@@ -82,4 +82,12 @@ describe('Team', () => {
             ['arn0', 'momos']
         );
     })
+
+    test('it turns a one player team to its state', () => {
+        expect(
+            Team.ofOnePlayer('arn0').toState()
+        ).toEqual(
+            ['arn0', '']
+        );
+    })
 });
