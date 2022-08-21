@@ -8,7 +8,7 @@ describe('Game', () => {
             new aGame().withRedPlayer('arn0')
                 .withBluePlayer('Popeye')
                 .withScore(0, 0)
-                .withOneVersusOneGameStartedEvent('arn0','Popeye')
+                .withGameStartedEvent()
                 .build()
         );
     })
@@ -20,7 +20,7 @@ describe('Game', () => {
             new aGame().withRedTeam('arn0', 'momos')
                 .withBlueTeam('Popeye', 'coco')
                 .withScore(0, 0)
-                .withTwoVersusTwoGameStartedEvent('arn0', 'momos', 'Popeye', 'coco')
+                .withGameStartedEvent()
                 .build()
         );
     })
