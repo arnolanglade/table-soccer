@@ -6,6 +6,10 @@ export class Team {
     public static ofOnePlayer(nickname: Nickname): Team {
         return new Team([new Player(nickname)]);
     }
+
+    public static ofTwoPlayer(strikerNickname: Nickname, fullbackNickname: Nickname): Team {
+        return new Team([new Player(strikerNickname), new Player(fullbackNickname)]);
+    }
 }
 
 export class Player {

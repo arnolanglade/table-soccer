@@ -30,4 +30,8 @@ describe('Team', () => {
     test('it builds a team of one player', () => {
         expect(Team.ofOnePlayer('arn0')).toEqual(new Team([new Player('arn0')]));
     })
+
+    test('it builds a team of two players', () => {
+        expect(Team.ofTwoPlayer('arn0', 'momos')).toEqual(new Team([new Player('arn0'), new Player('momos')]));
+    })
 });
