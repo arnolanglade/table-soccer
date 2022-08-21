@@ -8,22 +8,18 @@ export class GameEnded implements Event {
     constructor(private redTeam: Team, private blueTeam: Team,  private score: Score) {}
 }
 
-type Nickname = string;
+export type Player = string;
 
 export class Team {
     constructor(private players: Player[]) {}
 
-    public static ofOnePlayer(nickname: Nickname): Team {
-        return new Team([new Player(nickname)]);
+    public static ofOnePlayer(player: Player): Team {
+        return new Team([player]);
     }
 
-    public static ofTwoPlayer(attackerNickname: Nickname, defenderNickname: Nickname): Team {
-        return new Team([new Player(attackerNickname), new Player(defenderNickname)]);
+    public static ofTwoPlayer(attacker: Player, defender: Player): Team {
+        return new Team([attacker, defender]);
     }
-}
-
-export class Player {
-    constructor(private nickname: Nickname) {}
 }
 
 export class Score {
@@ -43,11 +39,11 @@ export class Game {
     ) {}
 
     public static startOneVersusOne(
-        redPlayerNickname: Nickname,
-        bluePlayerNickname: Nickname
+        redPlayer: Player,
+        bluePlayer: Player
     ): Game {
-        const redTeam = Team.ofOnePlayer(redPlayerNickname);
-        const blueTeam = Team.ofOnePlayer(bluePlayerNickname);
+        const redTeam = Team.ofOnePlayer(redPlayer);
+        const blueTeam = Team.ofOnePlayer(bluePlayer);
 
         return new Game(
             redTeam,
@@ -58,13 +54,13 @@ export class Game {
     }
 
     public static startTwoVersusTwo(
-        redAttackerNickname: Nickname,
-        redDefenderNickname: Nickname,
-        blueAttackerNickname: Nickname,
-        blueDefenderNickname: Nickname
+        redAttacker: Player,
+        redDefender: Player,
+        blueAttacker: Player,
+        blueDefender: Player
     ): Game {
-        const redTeam = Team.ofTwoPlayer(redAttackerNickname, redDefenderNickname);
-        const blueTeam = Team.ofTwoPlayer(blueAttackerNickname, blueDefenderNickname);
+        const redTeam = Team.ofTwoPlayer(redAttacker, redDefender);
+        const blueTeam = Team.ofTwoPlayer(blueAttacker, blueDefender);
 
         return new Game(
             redTeam,
@@ -99,23 +95,23 @@ export class aGame {
         this.gameScore = new Score(0, 0)
     }
 
-    public withRedPlayer(nickname: Nickname): aGame {
-        this.redTeam = Team.ofOnePlayer(nickname);
+    public withRedPlayer(player: Player): aGame {
+        this.redTeam = Team.ofOnePlayer(player);
         return this;
     }
 
-    public withBluePlayer(nickname: Nickname): aGame {
-        this.blueTeam = Team.ofOnePlayer(nickname);
+    public withBluePlayer(player: Player): aGame {
+        this.blueTeam = Team.ofOnePlayer(player);
         return this;
     }
 
-    public withRedTeam(attackerNickname: Nickname, defenderNickname: Nickname): aGame {
-        this.redTeam = Team.ofTwoPlayer(attackerNickname, defenderNickname);
+    public withRedTeam(attacker: Player, defender: Player): aGame {
+        this.redTeam = Team.ofTwoPlayer(attacker, defender);
         return this;
     }
 
-    public withBlueTeam(attackerNickname: Nickname, defenderNickname: Nickname): aGame {
-        this.blueTeam = Team.ofTwoPlayer(attackerNickname, defenderNickname);
+    public withBlueTeam(attacker: Player, defender: Player): aGame {
+        this.blueTeam = Team.ofTwoPlayer(attacker, defender);
         return this;
     }
 
