@@ -1,5 +1,9 @@
 interface Event {}
 
+export class GameStarted implements Event {
+    constructor(private redTeam: Team, private blueTeam: Team) {}
+}
+
 type Nickname = string;
 
 export class Team {
@@ -31,17 +35,21 @@ export class Game {
         private redTeam: Team,
         private blueTeam: Team,
         private gameScore: Score,
-        private events: Array<Event> = []
+        private events: Event[] = []
     ) {}
 
     public static startOneVersusOne(
         redPlayerNickname: Nickname,
         bluePlayerNickname: Nickname
     ): Game {
+        const redTeam = Team.ofOnePlayer(redPlayerNickname);
+        const blueTeam = Team.ofOnePlayer(bluePlayerNickname);
+
         return new Game(
-            Team.ofOnePlayer(redPlayerNickname),
-            Team.ofOnePlayer(bluePlayerNickname),
-            Score.playersHaveNotScored()
+            redTeam,
+            blueTeam,
+            Score.playersHaveNotScored(),
+            [new GameStarted(redTeam, blueTeam)]
         );
     }
 

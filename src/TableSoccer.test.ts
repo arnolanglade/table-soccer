@@ -1,4 +1,4 @@
-import {Game, aGame, Player, Score, Team} from "./TableSoccer";
+import {Game, aGame, Player, Score, Team, GameStarted} from "./TableSoccer";
 
 describe('Game', () => {
     test('it starts a one versus one game', () => {
@@ -8,6 +8,7 @@ describe('Game', () => {
             new aGame().withRedPlayer('arn0')
                 .withBluePlayer('Popeye')
                 .withScore(0, 0)
+                .withEvents(new GameStarted(Team.ofOnePlayer('arn0'), Team.ofOnePlayer('Popeye')))
                 .build()
         );
     })
