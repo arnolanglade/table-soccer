@@ -4,6 +4,10 @@ export class GameStarted implements Event {
     constructor(private redTeam: Team, private blueTeam: Team) {}
 }
 
+export class GameEnded implements Event {
+    constructor(private redTeam: Team, private blueTeam: Team,  private score: Score) {}
+}
+
 type Nickname = string;
 
 export class Team {
@@ -71,7 +75,14 @@ export class Game {
     }
 
     public recordScore(redPlayerScore: number, bluePlayerScore: number) {
-        return new Game(this.redTeam, this.blueTeam, new Score(redPlayerScore, bluePlayerScore));
+        const score = new Score(redPlayerScore, bluePlayerScore);
+
+        return new Game(
+            this.redTeam,
+            this.blueTeam,
+            score,
+            [new GameEnded(this.redTeam, this.blueTeam, score)],
+        );
     }
 }
 
