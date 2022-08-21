@@ -110,6 +110,7 @@ export class Game {
     public goalScoredBy(player: Player): Game {
         const teamColor = this.redTeam.isTeammate(player) ? TeamColor.Red : TeamColor.Blue;
         const gameScore = this.gameScore.increase(teamColor);
+
         return new Game(
             this.redTeam,
             this.blueTeam,
