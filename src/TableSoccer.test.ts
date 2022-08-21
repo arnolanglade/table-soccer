@@ -1,4 +1,4 @@
-import {Game, aGame, Player, Score, Team, GameStarted, GameEnded} from "./TableSoccer";
+import {Game, aGame, Player, Score, Team} from "./TableSoccer";
 
 describe('Game', () => {
     test('it starts a one versus one game', () => {
