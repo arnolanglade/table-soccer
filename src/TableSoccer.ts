@@ -63,6 +63,10 @@ export class GameEnded implements Event {
     constructor(private redTeam: Team, private blueTeam: Team,  private score: Score) {}
 }
 
+export class GoalScored implements Event {
+    constructor(private teamColor: TeamColor, private player: Player,  private score: Score) {}
+}
+
 export class Game {
     constructor(
         private redTeam: Team,
@@ -104,11 +108,13 @@ export class Game {
     }
 
     public goalScoredBy(player: Player): Game {
+        const teamColor = this.redTeam.isTeammate(player) ? TeamColor.Red : TeamColor.Blue;
+        const gameScore = this.gameScore.increase(teamColor);
         return new Game(
             this.redTeam,
             this.blueTeam,
-            this.gameScore.increase(this.redTeam.isTeammate(player) ? TeamColor.Red : TeamColor.Blue),
-            [],
+            gameScore,
+            [...this.events, new GoalScored(teamColor, player, gameScore)],
         );
     }
 
@@ -160,8 +166,14 @@ export class aGame {
         return this;
     }
 
+    public withGoalScoredEvent(player: Player): aGame {
+        const teamColor = this.redTeam.isTeammate(player) ? TeamColor.Red : TeamColor.Blue;
+        this.events = [...this.events, new GoalScored(teamColor, player, this.gameScore)];
+        return this;
+    }
+
     public withGameEndedEvent(): aGame {
-        this.events = [new GameEnded(this.redTeam, this.blueTeam, this.gameScore)];
+        this.events = [...this.events, new GameEnded(this.redTeam, this.blueTeam, this.gameScore)];
         return this;
     }
 

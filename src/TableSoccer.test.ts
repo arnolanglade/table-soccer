@@ -30,6 +30,7 @@ describe('Game', () => {
             .withRedPlayer('arn0')
             .withBluePlayer('Popeye')
             .withScore(0, 0)
+            .withGameStartedEvent()
             .build();
 
         expect(game.goalScoredBy('arn0')).toEqual(
@@ -37,6 +38,8 @@ describe('Game', () => {
                 .withRedPlayer('arn0')
                 .withBluePlayer('Popeye')
                 .withScore(1, 0)
+                .withGameStartedEvent()
+                .withGoalScoredEvent('arn0')
             .build()
         );
     })
