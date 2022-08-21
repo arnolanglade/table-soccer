@@ -7,8 +7,8 @@ export class Team {
         return new Team([new Player(nickname)]);
     }
 
-    public static ofTwoPlayer(strikerNickname: Nickname, fullbackNickname: Nickname): Team {
-        return new Team([new Player(strikerNickname), new Player(fullbackNickname)]);
+    public static ofTwoPlayer(attackerNickname: Nickname, defenderNickname: Nickname): Team {
+        return new Team([new Player(attackerNickname), new Player(defenderNickname)]);
     }
 }
 
@@ -27,10 +27,26 @@ export class Score {
 export class Game {
     constructor(private redTeam: Team,  private blueTeam: Team, private gameScore: Score) {}
 
-    public static startOneVersusOne(redPlayerNickname: Nickname, bluePlayerNickname: Nickname): Game {
+    public static startOneVersusOne(
+        redPlayerNickname: Nickname,
+        bluePlayerNickname: Nickname
+    ): Game {
         return new Game(
             Team.ofOnePlayer(redPlayerNickname),
             Team.ofOnePlayer(bluePlayerNickname),
+            Score.playersHaveNotScored()
+        );
+    }
+
+    public static startTwoVersusTwo(
+        redAttackerNickname: Nickname,
+        redDefenderNickname: Nickname,
+        blueAttackerNickname: Nickname,
+        blueDefenderNickname: Nickname
+    ): Game {
+        return new Game(
+            Team.ofTwoPlayer(redAttackerNickname, redDefenderNickname),
+            Team.ofTwoPlayer(blueAttackerNickname, blueDefenderNickname),
             Score.playersHaveNotScored()
         );
     }
@@ -59,6 +75,16 @@ export class aGame {
 
     public withBluePlayer(nickname: Nickname): aGame {
         this.blueTeam = Team.ofOnePlayer(nickname);
+        return this;
+    }
+
+    public withRedTeam(attackerNickname: Nickname, defenderNickname: Nickname): aGame {
+        this.redTeam = Team.ofTwoPlayer(attackerNickname, defenderNickname);
+        return this;
+    }
+
+    public withBlueTeam(attackerNickname: Nickname, defenderNickname: Nickname): aGame {
+        this.blueTeam = Team.ofTwoPlayer(attackerNickname, defenderNickname);
         return this;
     }
 

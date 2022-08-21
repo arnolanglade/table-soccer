@@ -1,12 +1,23 @@
 import {Game, aGame, Player, Score, Team} from "./TableSoccer";
 
 describe('Game', () => {
-    test('it starts a one versus game', () => {
+    test('it starts a one versus one game', () => {
         expect(
             Game.startOneVersusOne('arn0', 'Popeye')
         ).toEqual(
             new aGame().withRedPlayer('arn0')
                 .withBluePlayer('Popeye')
+                .withScore(0, 0)
+                .build()
+        );
+    })
+
+    test('it starts a two versus two game', () => {
+        expect(
+            Game.startTwoVersusTwo('arn0', 'momos', 'Popeye', 'coco')
+        ).toEqual(
+            new aGame().withRedTeam('arn0', 'momos')
+                .withBlueTeam('Popeye', 'coco')
                 .withScore(0, 0)
                 .build()
         );
