@@ -1,4 +1,4 @@
-import {Game, aGame, Player, Score, Team} from "./TableSoccer";
+import {Game, aGame, Player, Score, Team, TeamColor} from "./TableSoccer";
 
 describe('Game', () => {
     test('it starts a one versus one game', () => {
@@ -61,10 +61,14 @@ describe('Score', () => {
         expect(Score.playersHaveNotScored()).toEqual(new Score(0, 0));
     })
 
+    test('it increase the score for a team', () => {
+        expect(new Score(5, 5).increase(TeamColor.Red)).toEqual(
+            new Score(6, 5)
+        );
+    })
+
     test('it turns a score to its state', () => {
-        expect(
-            new Score(10, 5).toState()
-        ).toEqual(
+        expect(new Score(10, 5).toState() ).toEqual(
             [10, 5]
         );
     })

@@ -1,5 +1,10 @@
 export type Player = string;
 
+export enum TeamColor {
+    Red,
+    Blue
+}
+
 export class Team {
     constructor(private players: Player[]) {}
 
@@ -23,14 +28,24 @@ export class Team {
 }
 
 export class Score {
-    constructor(private redPlayerScore: number, private bluePlayerScore: number) {}
+    private scores: Record<TeamColor, number> = {[TeamColor.Red]: 0, [TeamColor.Blue]: 0};
+
+    constructor(redPlayerScore: number, bluePlayerScore: number) {
+        this.scores[TeamColor.Red] = redPlayerScore;
+        this.scores[TeamColor.Blue] = bluePlayerScore;
+    }
 
     public static playersHaveNotScored(): Score {
         return new Score(0, 0);
     }
 
+    public increase(team: TeamColor): Score {
+        this.scores[team]++
+        return new Score(this.scores[TeamColor.Red], this.scores[TeamColor.Blue]);
+    }
+
     public toState(): [number, number] {
-        return [this.redPlayerScore, this.bluePlayerScore];
+        return [this.scores[TeamColor.Red], this.scores[TeamColor.Blue]];
     }
 }
 
