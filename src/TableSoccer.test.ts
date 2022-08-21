@@ -87,6 +87,10 @@ describe('Team', () => {
         test('return true if the player belongs to the team', () => {
             expect(Team.ofTwoPlayer('arn0', 'momos').isTeammate('momos')).toEqual(true);
         })
+
+        test('return false if the player does not belong to the team', () => {
+            expect(Team.ofTwoPlayer('arn0', 'momos').isTeammate('Popeye')).toEqual(false);
+        })
     })
 
     describe('toState', () => {
