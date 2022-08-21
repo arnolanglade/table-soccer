@@ -56,6 +56,14 @@ describe('Score', () => {
     test('the score is 0 - 0 at the beginning of the game', () => {
         expect(Score.playersHaveNotScored()).toEqual(new Score(0, 0));
     })
+
+    test('it turns a score to its state', () => {
+        expect(
+            new Score(10, 5).toState()
+        ).toEqual(
+            [10, 5]
+        );
+    })
 });
 
 describe('Team', () => {

@@ -18,6 +18,10 @@ export class Score {
     public static playersHaveNotScored(): Score {
         return new Score(0, 0);
     }
+
+    public toState(): [number, number] {
+        return [this.redPlayerScore, this.bluePlayerScore];
+    }
 }
 
 interface Event {}
@@ -82,7 +86,7 @@ export class Game {
     }
 
     public toState(): [string, string, string, string, number, number] {
-        return ['arn0', 'momos', 'Popeye', 'coco', 10, 1];
+        return ['arn0', 'momos', 'Popeye', 'coco', ...this.gameScore.toState()];
     }
 }
 
