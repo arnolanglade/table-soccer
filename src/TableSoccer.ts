@@ -84,17 +84,6 @@ export class Game {
         );
     }
 
-    public recordScore(redPlayerScore: number, bluePlayerScore: number) {
-        const score = new Score(redPlayerScore, bluePlayerScore);
-
-        return new Game(
-            this.redTeam,
-            this.blueTeam,
-            score,
-            [new GameEnded(this.redTeam, this.blueTeam, score)],
-        );
-    }
-
     public toState(): [string, string, string, string, number, number] {
         return [...this.redTeam.toState(), ...this.blueTeam.toState(), ...this.gameScore.toState()];
     }

@@ -25,18 +25,6 @@ describe('Game', () => {
         );
     })
 
-    test('it records the score at the end of the game', () => {
-        const game = new aGame().build();
-
-        expect(
-            game.recordScore(10, 1)
-        ).toEqual(
-            new aGame().withScore(10, 1)
-                .withGameEndedEvent()
-                .build()
-        );
-    })
-
     test('it turns a game to its state', () => {
         const game = new aGame()
             .withRedTeam('arn0', 'momos')
