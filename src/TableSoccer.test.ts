@@ -83,19 +83,27 @@ describe('Team', () => {
         expect(Team.ofTwoPlayer('arn0', 'momos')).toEqual(new Team(['arn0', 'momos']));
     })
 
-    test('it turns a two players team to its state', () => {
-        expect(
-            Team.ofTwoPlayer('arn0', 'momos').toState()
-        ).toEqual(
-            ['arn0', 'momos']
-        );
+    describe('isTeammate', () => {
+        test('return true if the player belongs to the team', () => {
+            expect(Team.ofTwoPlayer('arn0', 'momos').isTeammate('momos')).toEqual(true);
+        })
     })
 
-    test('it turns a one player team to its state', () => {
-        expect(
-            Team.ofOnePlayer('arn0').toState()
-        ).toEqual(
-            ['arn0', '']
-        );
+    describe('toState', () => {
+        test('it turns a two players team to its state', () => {
+            expect(
+                Team.ofTwoPlayer('arn0', 'momos').toState()
+            ).toEqual(
+                ['arn0', 'momos']
+            );
+        })
+
+        test('it turns a one player team to its state', () => {
+            expect(
+                Team.ofOnePlayer('arn0').toState()
+            ).toEqual(
+                ['arn0', '']
+            );
+        })
     })
 });

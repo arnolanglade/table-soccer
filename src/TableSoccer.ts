@@ -16,6 +16,9 @@ export class Team {
         return new Team([attacker, defender]);
     }
 
+    public isTeammate(): boolean{
+        return true;
+    }
     public toState(): [string, string] {
         return this.players.reduce(
             (players: string[], player: Player, index: number) => {
