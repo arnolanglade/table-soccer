@@ -1,4 +1,4 @@
-import {Game, aGame, Player, Score, Team, TeamColor} from "./TableSoccer";
+import {Game, aGame, Score, Team, TeamColor} from "./TableSoccer";
 
 describe('Game', () => {
     test('it starts a one versus one game', () => {
@@ -25,23 +25,25 @@ describe('Game', () => {
         );
     })
 
-    test('it records a gaol scored by a registered player', () => {
-        const game = new aGame()
-            .withRedPlayer('arn0')
-            .withBluePlayer('Popeye')
-            .withScore(0, 0)
-            .withGameStartedEvent()
-            .build();
-
-        expect(game.goalScoredBy('arn0')).toEqual(
-            new aGame()
+    describe('goalScoredBy', () => {
+        test('records a gaol scored by a registered player', () => {
+            const game = new aGame()
                 .withRedPlayer('arn0')
                 .withBluePlayer('Popeye')
-                .withScore(1, 0)
+                .withScore(0, 0)
                 .withGameStartedEvent()
-                .withGoalScoredEvent('arn0')
-            .build()
-        );
+                .build();
+
+            expect(game.goalScoredBy('arn0')).toEqual(
+                new aGame()
+                    .withRedPlayer('arn0')
+                    .withBluePlayer('Popeye')
+                    .withScore(1, 0)
+                    .withGameStartedEvent()
+                    .withGoalScoredEvent('arn0')
+                .build()
+            );
+        })
     })
 
     test('it turns a game to its state', () => {
