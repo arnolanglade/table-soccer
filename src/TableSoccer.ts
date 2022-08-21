@@ -1,3 +1,5 @@
+interface Event {}
+
 type Nickname = string;
 
 export class Team {
@@ -25,7 +27,12 @@ export class Score {
 }
 
 export class Game {
-    constructor(private redTeam: Team,  private blueTeam: Team, private gameScore: Score) {}
+    constructor(
+        private redTeam: Team,
+        private blueTeam: Team,
+        private gameScore: Score,
+        private events: Array<Event> = []
+    ) {}
 
     public static startOneVersusOne(
         redPlayerNickname: Nickname,
@@ -61,6 +68,7 @@ export class aGame {
     private redTeam: Team
     private blueTeam: Team
     private gameScore: Score
+    private events: Event[] = []
 
     constructor() {
         this.redTeam = Team.ofOnePlayer('arn0');
@@ -93,7 +101,12 @@ export class aGame {
         return this;
     }
 
+    public withEvents(...events: Event[]): aGame {
+        this.events = events;
+        return this;
+    }
+
     public build(): Game {
-        return new Game(this.redTeam, this.blueTeam, this.gameScore);
+        return new Game(this.redTeam, this.blueTeam, this.gameScore, this.events);
     }
 }
