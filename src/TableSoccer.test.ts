@@ -67,17 +67,38 @@ describe('Game', () => {
     })
 
     test('it turns a game to its state', () => {
-        const game = new aGame()
-            .withRedTeam('arn0', 'momos')
-            .withBlueTeam('Popeye', 'coco')
-            .withScore(10, 1)
-            .build();
+        let game = Game.startTwoVersusTwo('arn0', 'momos', 'Popeye', 'coco')
+        game = game.goalScoredBy('coco')
+        game = game.goalScoredBy('momos')
+        game = game.goalScoredBy('momos')
+        game = game.goalScoredBy('coco')
+        game = game.goalScoredBy('arn0')
+        game = game.goalScoredBy('arn0')
+        game = game.goalScoredBy('arn0')
+        game = game.goalScoredBy('coco')
+        game = game.goalScoredBy('momos')
+        game = game.goalScoredBy('momos')
+        game = game.goalScoredBy('momos')
+        game = game.goalScoredBy('arn0')
+        game = game.goalScoredBy('arn0')
 
-        expect(
-            game.toState()
-        ).toEqual(
-            ['arn0', 'momos', 'Popeye', 'coco', 10, 1]
-        );
+        expect(game.toState()).toEqual([
+            ['Game', '{"red":["arn0","momos"],"blue":["Popeye","coco"]}'],
+            ['Game', '{"teamColor":1,"player":"coco","score":[0,1]}'],
+            ['Game', '{"teamColor":0,"player":"momos","score":[1,1]}'],
+            ['Game', '{"teamColor":0,"player":"momos","score":[2,1]}'],
+            ['Game', '{"teamColor":1,"player":"coco","score":[2,2]}'],
+            ['Game', '{"teamColor":0,"player":"arn0","score":[3,2]}'],
+            ['Game', '{"teamColor":0,"player":"arn0","score":[4,2]}'],
+            ['Game', '{"teamColor":0,"player":"arn0","score":[5,2]}'],
+            ['Game', '{"teamColor":1,"player":"coco","score":[5,3]}'],
+            ['Game', '{"teamColor":0,"player":"momos","score":[6,3]}'],
+            ['Game', '{"teamColor":0,"player":"momos","score":[7,3]}'],
+            ['Game', '{"teamColor":0,"player":"momos","score":[8,3]}'],
+            ['Game', '{"teamColor":0,"player":"arn0","score":[9,3]}'],
+            ['Game', '{"teamColor":0,"player":"arn0","score":[10,3]}'],
+            ['Game', '{"red":["arn0","momos"],"blue":["Popeye","coco"],"score":[10,3]}'],
+        ]);
     })
 });
 

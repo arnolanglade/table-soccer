@@ -45,8 +45,9 @@ export class Score {
     }
 
     public increase(team: TeamColor): Score {
-        this.scores[team]++
-        return new Score(this.scores[TeamColor.Red], this.scores[TeamColor.Blue]);
+        let scores = [this.scores[TeamColor.Red], this.scores[TeamColor.Blue]];
+        scores[team] = scores[team] + 1;
+        return new Score(scores[TeamColor.Red], scores[TeamColor.Blue]);
     }
 
     public canIncrease(team: TeamColor): boolean {
@@ -58,7 +59,9 @@ export class Score {
     }
 }
 
-interface Event {}
+interface Event {
+    toState(): string
+}
 
 export class GameStarted implements Event {
     constructor(private redTeam: Team, private blueTeam: Team) {}
@@ -153,8 +156,8 @@ export class Game {
         );
     }
 
-    public toState(): [string, string, string, string, number, number] {
-        return [...this.redTeam.toState(), ...this.blueTeam.toState(), ...this.gameScore.toState()];
+    public toState(): [[string, string]] {
+        return this.events.map((event: Event) => ['Game', event.toState()]);
     }
 }
 
