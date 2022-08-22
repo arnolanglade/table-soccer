@@ -32,6 +32,7 @@ export class Team {
 }
 
 export class Score {
+    private static readonly MAX_SCORE = 10;
     private scores: Record<TeamColor, number> = {[TeamColor.Red]: 0, [TeamColor.Blue]: 0};
 
     constructor(redPlayerScore: number, bluePlayerScore: number) {
@@ -49,7 +50,7 @@ export class Score {
     }
 
     public canIncrease(team: TeamColor): boolean {
-        return this.scores[team] < 10;
+        return this.scores[team] < Score.MAX_SCORE;
     }
 
     public toState(): [number, number] {
