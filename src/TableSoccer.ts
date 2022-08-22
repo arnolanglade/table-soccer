@@ -85,6 +85,14 @@ export class GameEnded implements Event {
 
 export class GoalScored implements Event {
     constructor(private teamColor: TeamColor, private player: Player,  private score: Score) {}
+
+    public toState() {
+        return JSON.stringify({
+            teamColor: this.teamColor,
+            player: this.player,
+            score: this.score.toState(),
+        });
+    }
 }
 
 export class Game {
