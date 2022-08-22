@@ -44,6 +44,26 @@ describe('Game', () => {
                 .build()
             );
         })
+
+        test('records a game ended event when the first player has 10 points', () => {
+            const game = new aGame()
+                .withRedPlayer('arn0')
+                .withBluePlayer('Popeye')
+                .withScore(9, 1)
+                .withGameStartedEvent()
+                .build();
+
+            expect(game.goalScoredBy('arn0')).toEqual(
+                new aGame()
+                    .withRedPlayer('arn0')
+                    .withBluePlayer('Popeye')
+                    .withScore(10, 1)
+                    .withGameStartedEvent()
+                    .withGoalScoredEvent('arn0')
+                    .withGameEndedEvent()
+                    .build()
+            );
+        })
     })
 
     test('it turns a game to its state', () => {

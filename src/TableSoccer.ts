@@ -116,11 +116,17 @@ export class Game {
         const teamColor = this.redTeam.isTeammate(player) ? TeamColor.Red : TeamColor.Blue;
         const gameScore = this.gameScore.increase(teamColor);
 
+        this.events.push(new GoalScored(teamColor, player, gameScore))
+
+        if (!gameScore.canIncrease(teamColor)) {
+            this.events.push(new GameEnded(this.redTeam, this.blueTeam, gameScore))
+        }
+
         return new Game(
             this.redTeam,
             this.blueTeam,
             gameScore,
-            [...this.events, new GoalScored(teamColor, player, gameScore)],
+            this.events,
         );
     }
 
