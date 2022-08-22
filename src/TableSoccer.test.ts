@@ -25,6 +25,35 @@ describe('Game', () => {
         );
     })
 
+    test('it builds a game from events', () => {
+        expect(
+            Game.fromEvents([
+                new GameStarted(
+                    Team.ofTwoPlayer('arn0', 'momos'),
+                    Team.ofTwoPlayer('Popeye', 'coco'),
+                ),
+                new GoalScored(
+                    TeamColor.Red,
+                    'arn0',
+                    new Score(1, 0)
+                ),
+                new GameEnded(
+                    Team.ofTwoPlayer('arn0', 'momos'),
+                    Team.ofTwoPlayer('Popeye', 'coco'),
+                    new Score(10, 0)
+                )
+            ])
+        ).toEqual(
+            new aGame().withRedTeam('arn0', 'momos')
+                .withBlueTeam('Popeye', 'coco')
+                .withScore(10, 0)
+                .withGameStartedEvent()
+                .withGoalScoredEvent('arn0', 1, 0)
+                .withGameEndedEvent()
+                .build()
+        );
+    })
+
     describe('goalScoredBy', () => {
         test('records a gaol scored by a registered player', () => {
             const game = new aGame()
@@ -40,7 +69,7 @@ describe('Game', () => {
                     .withBluePlayer('Popeye')
                     .withScore(1, 0)
                     .withGameStartedEvent()
-                    .withGoalScoredEvent('arn0')
+                    .withGoalScoredEvent('arn0', 1, 0)
                 .build()
             );
         })
@@ -59,7 +88,7 @@ describe('Game', () => {
                     .withBluePlayer('Popeye')
                     .withScore(10, 1)
                     .withGameStartedEvent()
-                    .withGoalScoredEvent('arn0')
+                    .withGoalScoredEvent('arn0', 10, 1)
                     .withGameEndedEvent()
                     .build()
             );

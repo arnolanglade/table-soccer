@@ -64,7 +64,7 @@ interface Event {
 }
 
 export class GameStarted implements Event {
-    constructor(private redTeam: Team, private blueTeam: Team) {}
+    constructor(public readonly redTeam: Team, public readonly blueTeam: Team) {}
 
     public toState(): string {
         return JSON.stringify({
@@ -75,7 +75,7 @@ export class GameStarted implements Event {
 }
 
 export class GameEnded implements Event {
-    constructor(private redTeam: Team, private blueTeam: Team,  private score: Score) {}
+    constructor(public readonly redTeam: Team, public readonly blueTeam: Team,  public readonly score: Score) {}
 
     public toState(): string {
         return JSON.stringify({
@@ -87,7 +87,7 @@ export class GameEnded implements Event {
 }
 
 export class GoalScored implements Event {
-    constructor(private teamColor: TeamColor, private player: Player,  private score: Score) {}
+    constructor(public readonly teamColor: TeamColor, public readonly player: Player, public readonly score: Score) {}
 
     public toState() {
         return JSON.stringify({
@@ -136,6 +136,24 @@ export class Game {
             Score.playersHaveNotScored(),
             [new GameStarted(redTeam, blueTeam)],
         );
+    }
+
+    public static fromEvents(events: Event[]): Game {
+        let redTeam, blueTeam, score;
+        events.forEach((event: Event) => {
+            switch (true) {
+                case event instanceof GameStarted:
+                    redTeam = event.redTeam;
+                    blueTeam = event.blueTeam;
+                    break;
+                case event instanceof GameEnded:
+                    score = event.score;
+                    break;
+            }
+
+        });
+
+        return new Game(redTeam, blueTeam, score, events);
     }
 
     public goalScoredBy(player: Player): Game {
@@ -204,9 +222,9 @@ export class aGame {
         return this;
     }
 
-    public withGoalScoredEvent(player: Player): aGame {
+    public withGoalScoredEvent(player: Player, redTeamScore, blueTeamScore): aGame {
         const teamColor = this.redTeam.isTeammate(player) ? TeamColor.Red : TeamColor.Blue;
-        this.events = [...this.events, new GoalScored(teamColor, player, this.gameScore)];
+        this.events = [...this.events, new GoalScored(teamColor, player, new Score(redTeamScore, blueTeamScore))];
         return this;
     }
 
