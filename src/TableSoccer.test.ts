@@ -66,10 +66,20 @@ describe('Score', () => {
         expect(Score.playersHaveNotScored()).toEqual(new Score(0, 0));
     })
 
-    test('it increase the score for a team', () => {
+    test('it increases the score for a team', () => {
         expect(new Score(5, 5).increase(TeamColor.Red)).toEqual(
             new Score(6, 5)
         );
+    })
+
+    describe('canIncrease', () => {
+        test('return false if a team has reached the max score', () => {
+            expect(new Score(10, 5).canIncrease(TeamColor.Red)).toEqual(false);
+        })
+
+        test('return true if a team still can score', () => {
+            expect(new Score(9, 5).canIncrease(TeamColor.Red)).toEqual(true);
+        })
     })
 
     test('it turns a score to its state', () => {
@@ -89,17 +99,17 @@ describe('Team', () => {
     })
 
     describe('isTeammate', () => {
-        test('return true if the player belongs to the team', () => {
+        test('returns true if the player belongs to the team', () => {
             expect(Team.ofTwoPlayer('arn0', 'momos').isTeammate('momos')).toEqual(true);
         })
 
-        test('return false if the player does not belong to the team', () => {
+        test('returns false if the player does not belong to the team', () => {
             expect(Team.ofTwoPlayer('arn0', 'momos').isTeammate('Popeye')).toEqual(false);
         })
     })
 
     describe('toState', () => {
-        test('it turns a two players team to its state', () => {
+        test('turns a two players team to its state', () => {
             expect(
                 Team.ofTwoPlayer('arn0', 'momos').toState()
             ).toEqual(
@@ -107,7 +117,7 @@ describe('Team', () => {
             );
         })
 
-        test('it turns a one player team to its state', () => {
+        test('turns a one player team to its state', () => {
             expect(
                 Team.ofOnePlayer('arn0').toState()
             ).toEqual(

@@ -48,6 +48,10 @@ export class Score {
         return new Score(this.scores[TeamColor.Red], this.scores[TeamColor.Blue]);
     }
 
+    public canIncrease(team: TeamColor): boolean {
+        return this.scores[team] < 10;
+    }
+
     public toState(): [number, number] {
         return [this.scores[TeamColor.Red], this.scores[TeamColor.Blue]];
     }
