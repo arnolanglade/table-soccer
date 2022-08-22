@@ -1,4 +1,4 @@
-import {Game, aGame, Score, Team, TeamColor} from "./TableSoccer";
+import {Game, aGame, Score, Team, TeamColor, GameStarted} from "./TableSoccer";
 
 describe('Game', () => {
     test('it starts a one versus one game', () => {
@@ -144,5 +144,13 @@ describe('Team', () => {
                 ['arn0', '']
             );
         })
+    })
+});
+
+describe('Event', () => {
+    test('it turns a GameStarted to its state', () => {
+        expect(new GameStarted(Team.ofTwoPlayer('arn0', 'momos'), Team.ofTwoPlayer('Popeye', 'coco')).toState() ).toEqual(
+            '{"red":["arn0","momos"],"blue":["Popeye","coco"]}'
+        );
     })
 });

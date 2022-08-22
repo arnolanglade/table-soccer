@@ -62,6 +62,13 @@ interface Event {}
 
 export class GameStarted implements Event {
     constructor(private redTeam: Team, private blueTeam: Team) {}
+
+    public toState(): string {
+        return JSON.stringify({
+            red: this.redTeam.toState(),
+            blue: this.blueTeam.toState(),
+        });
+    }
 }
 
 export class GameEnded implements Event {
